@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Play } from 'lucide-react';
-import { Editor } from './components/Editor';
-import { Result } from './components/Result';
-import { useEval } from './hooks/useEval';
+import { useState } from "react";
+import { Play } from "lucide-react";
+import { Editor } from "./components/Editor";
+import { Result } from "./components/Result";
+import { useEval } from "./hooks/useEval";
 
 const DEFAULT_CODE = `// Write your JavaScript code here
 function fibonacci(n) {
@@ -22,8 +22,12 @@ function App() {
     <div className="min-h-screen bg-gray-100">
       <div className="container mx-auto px-4 py-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">JavaScript Playground</h1>
-          <p className="text-gray-600 mt-2">Write and execute JavaScript code in real-time</p>
+          <h1 className="text-3xl font-bold text-gray-900">
+            JavaScript Playground
+          </h1>
+          <p className="text-gray-600 mt-2">
+            Write and execute JavaScript code in real-time
+          </p>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

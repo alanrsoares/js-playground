@@ -1,8 +1,8 @@
-import { useState, useCallback } from 'react';
-import { createConsoleProxy } from '../utils/console';
+import { useState, useCallback } from "react";
+import { createConsoleProxy } from "../utils/console";
 
 export function useEval() {
-  const [result, setResult] = useState('// Result will appear here');
+  const [result, setResult] = useState("// Result will appear here");
   const [error, setError] = useState<string | null>(null);
 
   const evaluateCode = useCallback((code: string) => {
@@ -36,21 +36,26 @@ export function useEval() {
 
       // Combine console output with the result
       const consoleOutput = getOutput();
-      const resultOutput = typeof evaluatedResult === 'undefined' 
-        ? '// undefined'
-        : String(evaluatedResult);
+      const resultOutput =
+        typeof evaluatedResult === "undefined"
+          ? "// undefined"
+          : String(evaluatedResult);
 
-      setResult([
-        consoleOutput,
-        consoleOutput && resultOutput ? '\n' : '',
-        resultOutput !== '// undefined' ? `// Return value: ${resultOutput}` : resultOutput
-      ].join(''));
-      
+      setResult(
+        [
+          consoleOutput,
+          consoleOutput && resultOutput ? "\n" : "",
+          resultOutput !== "// undefined"
+            ? `// Return value: ${resultOutput}`
+            : resultOutput,
+        ].join("")
+      );
+
       setError(null);
     } catch (err) {
       const consoleOutput = getOutput();
-      setError(err instanceof Error ? err.message : 'An error occurred');
-      setResult(consoleOutput || '');
+      setError(err instanceof Error ? err.message : "An error occurred");
+      setResult(consoleOutput || "");
     }
   }, []);
 

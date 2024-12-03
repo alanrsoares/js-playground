@@ -1,14 +1,14 @@
-import React from 'react';
-import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-import { oneDark } from '@codemirror/theme-one-dark';
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { oneDark } from "@codemirror/theme-one-dark";
+import { FC } from "react";
 
 interface EditorProps {
   code: string;
   onChange: (value: string) => void;
 }
 
-export function Editor({ code, onChange }: EditorProps) {
+export const Editor: FC<EditorProps> = ({ code, onChange }) => {
   return (
     <div className="h-full w-full">
       <CodeMirror
@@ -47,4 +47,4 @@ export function Editor({ code, onChange }: EditorProps) {
       />
     </div>
   );
-}
+};

@@ -1,12 +1,12 @@
-import React from 'react';
-import { AlertTriangle } from 'lucide-react';
+import { AlertTriangle } from "lucide-react";
+import { FC } from "react";
 
 interface ResultProps {
   result: string;
   error: string | null;
 }
 
-export function Result({ result, error }: ResultProps) {
+export const Result: FC<ResultProps> = ({ result, error }) => {
   return (
     <div className="h-full w-full bg-gray-900 text-white p-4 font-mono text-sm overflow-auto">
       {error ? (
@@ -19,4 +19,4 @@ export function Result({ result, error }: ResultProps) {
       )}
     </div>
   );
-}
+};
