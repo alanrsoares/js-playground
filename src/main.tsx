@@ -8,8 +8,8 @@ import { Maybe } from "./lib/monad.ts";
 
 Maybe.of(document.getElementById("root"))
   .map(createRoot)
-  .map((root) =>
-    root.render(
+  .map(({ render }) =>
+    render(
       <StrictMode>
         <App />
       </StrictMode>,
