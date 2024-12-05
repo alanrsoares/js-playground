@@ -16,7 +16,8 @@ function fibonacci(n) {
 }
 
 console.log('Starting fibonacci calculation...');
-fibonacci(5);`;
+
+return fibonacci(5);`;
 
 const CardContainter = tw.div`
   h-[500px] overflow-hidden rounded-lg shadow-lg
@@ -48,6 +49,7 @@ function App() {
                 shape="circle"
                 size="sm"
                 color="success"
+                className="hover:animate-pulse"
               >
                 <Play className="size-[1em]" />
               </Button>
