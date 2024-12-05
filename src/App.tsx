@@ -34,7 +34,7 @@ function App() {
     <div className="min-h-screen bg-base-100">
       <div className="container mx-auto px-4 py-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold">JavaScript Playground</h1>
+          <h1 className="text-3xl font-bold">JS Playground</h1>
           <p className="mt-2 opacity-90">
             Write and execute JavaScript code in real-time
           </p>

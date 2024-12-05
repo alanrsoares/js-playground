@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { javascript } from "@codemirror/lang-javascript";
-import { oneDark } from "@codemirror/theme-one-dark";
+import { dracula } from "@uiw/codemirror-theme-dracula";
 import CodeMirror from "@uiw/react-codemirror";
 
 interface EditorProps {
@@ -15,7 +15,7 @@ export const Editor: FC<EditorProps> = ({ code, onChange }) => {
       <CodeMirror
         value={code}
         height="100%"
-        theme={oneDark}
+        theme={dracula}
         extensions={[javascript({ jsx: true })]}
         onChange={onChange}
         className="h-full text-sm"
