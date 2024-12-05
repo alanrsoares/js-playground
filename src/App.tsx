@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Button } from "react-daisyui";
 
 import { Play } from "lucide-react";
+import tw from "styled-cva";
 
 import { Editor } from "./components/Editor";
 import { Result } from "./components/Result";
@@ -16,6 +18,14 @@ function fibonacci(n) {
 console.log('Starting fibonacci calculation...');
 fibonacci(5);`;
 
+const CardContainter = tw.div`
+  h-[500px] overflow-hidden rounded-lg shadow-lg
+`;
+
+const CardHeader = tw.div`
+  bg-gray-800 px-4 h-14 py-2 flex items-center justify-between
+`;
+
 function App() {
   const [code, setCode] = useState(DEFAULT_CODE);
   const { result, error, evaluateCode } = useEval();
@@ -30,24 +40,26 @@ function App() {
           </p>
         </header>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div className="h-[500px] overflow-hidden rounded-lg bg-white shadow-lg">
-            <div className="flex items-center justify-between bg-gray-800 px-4 py-2">
+          <CardContainter>
+            <CardHeader>
               <h2 className="font-semibold text-white">Editor</h2>
-              <button
+              <Button
                 onClick={() => evaluateCode(code)}
-                className="btn btn-circle btn-success btn-sm"
+                shape="circle"
+                size="sm"
+                color="success"
               >
-                <Play className="size-4" />
-              </button>
-            </div>
+                <Play className="size-[1em]" />
+              </Button>
+            </CardHeader>
             <Editor code={code} onChange={setCode} />
-          </div>
-          <div className="h-[500px] overflow-hidden rounded-lg bg-white shadow-lg">
-            <div className="bg-gray-800 px-4 py-2">
+          </CardContainter>
+          <CardContainter>
+            <CardHeader>
               <h2 className="font-semibold text-white">Output</h2>
-            </div>
+            </CardHeader>
             <Result result={result} error={error} />
-          </div>
+          </CardContainter>
         </div>
       </div>
     </div>
