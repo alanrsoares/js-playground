@@ -1,4 +1,5 @@
 import daisyui from "daisyui";
+
 import { Config } from "tailwindcss";
 
 export default {

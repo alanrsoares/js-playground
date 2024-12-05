@@ -1,4 +1,5 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from "react";
+
 import { createConsoleProxy } from "../utils/console";
 
 export function useEval() {
@@ -48,7 +49,7 @@ export function useEval() {
           resultOutput !== "// undefined"
             ? `// Return value: ${resultOutput}`
             : resultOutput,
-        ].join("")
+        ].join(""),
       );
 
       setError(null);

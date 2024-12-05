@@ -1,7 +1,8 @@
-import CodeMirror from "@uiw/react-codemirror";
+import { FC } from "react";
+
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
-import { FC } from "react";
+import CodeMirror from "@uiw/react-codemirror";
 
 interface EditorProps {
   code: string;
@@ -17,7 +18,7 @@ export const Editor: FC<EditorProps> = ({ code, onChange }) => {
         theme={oneDark}
         extensions={[javascript({ jsx: true })]}
         onChange={onChange}
-        className="text-sm h-full"
+        className="h-full text-sm"
         basicSetup={{
           lineNumbers: true,
           highlightActiveLineGutter: true,

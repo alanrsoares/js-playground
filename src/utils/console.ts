@@ -6,9 +6,11 @@ export function createConsoleProxy() {
       output.push(
         args
           .map((arg) =>
-            typeof arg === "object" ? JSON.stringify(arg, null, 2) : String(arg)
+            typeof arg === "object"
+              ? JSON.stringify(arg, null, 2)
+              : String(arg),
           )
-          .join(" ")
+          .join(" "),
       );
     },
     error: (...args: unknown[]) => {

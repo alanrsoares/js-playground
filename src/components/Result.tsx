@@ -1,5 +1,6 @@
-import { AlertTriangle } from "lucide-react";
 import { FC } from "react";
+
+import { AlertTriangle } from "lucide-react";
 
 interface ResultProps {
   result: string;
@@ -8,10 +9,10 @@ interface ResultProps {
 
 export const Result: FC<ResultProps> = ({ result, error }) => {
   return (
-    <div className="h-full w-full bg-gray-900 text-white p-4 font-mono text-sm overflow-auto">
+    <div className="h-full w-full overflow-auto bg-gray-900 p-4 font-mono text-sm text-white">
       {error ? (
         <div className="flex items-start gap-2 text-red-400">
-          <AlertTriangle className="w-5 h-5 mt-0.5" />
+          <AlertTriangle className="mt-0.5 h-5 w-5" />
           <pre className="whitespace-pre-wrap">{error}</pre>
         </div>
       ) : (
