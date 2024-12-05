@@ -4,14 +4,14 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 import App from "./App.tsx";
+import { Maybe } from "./lib/monad.ts";
 
-const target = document.getElementById("root");
-
-if (target) {
-  const root = createRoot(target);
-  root.render(
-    <StrictMode>
-      <App />
-    </StrictMode>,
+Maybe.of(document.getElementById("root"))
+  .map(createRoot)
+  .map((root) =>
+    root.render(
+      <StrictMode>
+        <App />
+      </StrictMode>,
+    ),
   );
-}
