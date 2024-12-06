@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useCallback } from "react";
 import { Button } from "react-daisyui";
 
-import { Play } from "lucide-react";
+import { Code, Play } from "lucide-react";
 import tw from "styled-cva";
 
-import { Editor } from "./components/Editor";
-import { Result } from "./components/Result";
-import { useEval } from "./hooks/useEval";
+import { Editor } from "~/components/Editor";
+import { Result } from "~/components/Result";
+import { useEval } from "~/hooks/useEval";
+import useLocalStorageState from "~/lib/hooks/useLocalStorageState";
+import usePrettierFormatter from "~/lib/hooks/usePrettierFormatter";
+import { Maybe } from "~/lib/monad";
 
-const DEFAULT_CODE = `// Write your JavaScript code here
+const INITIAL_CODE = `// Write your JavaScript code here
 function fibonacci(n) {
   if (n <= 1) return n;
   console.log(\`Calculating fibonacci(\${n})\`);
@@ -28,8 +31,23 @@ const CardHeader = tw.div`
 `;
 
 function App() {
-  const [code, setCode] = useState(DEFAULT_CODE);
+  const [code, setCode] = useLocalStorageState(
+    "js-playground-code",
+    INITIAL_CODE,
+  );
   const { result, error, evaluateCode } = useEval();
+
+  const format = usePrettierFormatter();
+
+  const handleFormat = useCallback(async () => {
+    try {
+      const formatted = await format(code);
+
+      Maybe.of(formatted).map(setCode);
+    } catch (err) {
+      console.error("Formatting error:", err);
+    }
+  }, [code, format, setCode]);
 
   return (
     <div className="min-h-screen bg-base-100">
@@ -44,15 +62,25 @@ function App() {
           <CardContainter>
             <CardHeader>
               <h2 className="font-semibold text-white">Editor</h2>
-              <Button
-                onClick={() => evaluateCode(code)}
-                shape="circle"
-                size="sm"
-                color="success"
-                className="hover:animate-pulse"
-              >
-                <Play className="size-[1em]" />
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  onClick={handleFormat}
+                  shape="circle"
+                  size="sm"
+                  color="info"
+                >
+                  <Code className="size-[1em]" />
+                </Button>
+                <Button
+                  onClick={evaluateCode.bind(null, code)}
+                  shape="circle"
+                  size="sm"
+                  color="success"
+                  className="hover:animate-pulse"
+                >
+                  <Play className="size-[1em]" />
+                </Button>
+              </div>
             </CardHeader>
             <Editor code={code} onChange={setCode} />
           </CardContainter>
