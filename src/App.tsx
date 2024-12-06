@@ -10,8 +10,9 @@ import { useEval } from "~/hooks/useEval";
 import useLocalStorageState from "~/lib/hooks/useLocalStorageState";
 import usePrettierFormatter from "~/lib/hooks/usePrettierFormatter";
 import { Maybe } from "~/lib/monad";
+import useKeyBindings from "./lib/hooks/useKeybindings";
 
-const INITIAL_CODE = `// Write your JavaScript code here
+const DEFAULT_CODE = `// Write your JavaScript code here
 function fibonacci(n) {
   if (n <= 1) return n;
   console.log(\`Calculating fibonacci(\${n})\`);
@@ -33,7 +34,7 @@ const CardHeader = tw.div`
 function App() {
   const [code, setCode] = useLocalStorageState(
     "js-playground-code",
-    INITIAL_CODE,
+    DEFAULT_CODE,
   );
   const { result, error, evaluateCode } = useEval();
 
@@ -48,6 +49,30 @@ function App() {
       console.error("Formatting error:", err);
     }
   }, [code, format, setCode]);
+
+  useKeyBindings([
+    {
+      key: "Enter",
+      modifiers: {
+        ctrlKey: true,
+      },
+      callback: (e) => {
+        e.preventDefault();
+        evaluateCode(code);
+      },
+    },
+    {
+      key: "f",
+      modifiers: {
+        ctrlKey: true,
+        shiftKey: true,
+      },
+      callback: async (e) => {
+        e.preventDefault();
+        await handleFormat();
+      },
+    },
+  ]);
 
   return (
     <div className="min-h-screen bg-base-100">
