@@ -7,10 +7,10 @@ import tw from "styled-cva";
 import { Editor } from "~/components/Editor";
 import { Result } from "~/components/Result";
 import { useEval } from "~/hooks/useEval";
+import useKeyBindings from "~/lib/hooks/useKeybindings";
 import useLocalStorageState from "~/lib/hooks/useLocalStorageState";
 import usePrettierFormatter from "~/lib/hooks/usePrettierFormatter";
 import { Maybe } from "~/lib/monad";
-import useKeyBindings from "./lib/hooks/useKeybindings";
 
 const DEFAULT_CODE = `// Write your JavaScript code here
 function fibonacci(n) {
