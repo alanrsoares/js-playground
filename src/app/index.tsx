@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Button } from "react-daisyui";
 
 import { Code, Play } from "lucide-react";
@@ -39,6 +39,32 @@ function App() {
   const { result, error, evaluateCode } = useEval();
 
   const format = usePrettierFormatter();
+
+  // Function to update the URL with the current code
+  const updateURLWithCode = useCallback((code: string) => {
+    const encodedCode = encodeURIComponent(code);
+    const newURL = `${window.location.protocol}//${window.location.host}${window.location.pathname}?code=${encodedCode}`;
+    window.history.replaceState(null, "", newURL);
+  }, []);
+
+  // Function to load code from the URL
+  const loadCodeFromURL = useCallback(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("code")) {
+      return Maybe.of(urlParams.get("code")).map(decodeURIComponent);
+    }
+    return Maybe.ofFalsy<string>();
+  }, []);
+
+  // On component mount, check URL for code
+  useEffect(() => {
+    const urlCode = loadCodeFromURL();
+    urlCode.map(setCode);
+  }, [loadCodeFromURL, setCode]);
+
+  useEffect(() => {
+    updateURLWithCode(code);
+  }, [code, updateURLWithCode]);
 
   const handleFormat = useCallback(async () => {
     try {
