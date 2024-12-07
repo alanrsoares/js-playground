@@ -7,6 +7,7 @@ import tw from "styled-cva";
 import { Editor } from "~/components/Editor";
 import { Result } from "~/components/Result";
 import { useEval } from "~/hooks/useEval";
+import { AppLogo } from "~/icons/AppLogo";
 import useKeyBindings from "~/lib/hooks/useKeyBindings";
 import useLocalStorageState from "~/lib/hooks/useLocalStorageState";
 import usePrettierFormatter from "~/lib/hooks/usePrettierFormatter";
@@ -104,7 +105,10 @@ function App() {
     <div className="min-h-screen bg-base-100">
       <div className="container mx-auto px-4 py-8">
         <header className="mb-8">
-          <h1 className="text-3xl font-bold">JS Playground</h1>
+          <h1 className="flex items-center gap-2 text-3xl font-bold">
+            <AppLogo className="size-[0.75em]" />
+            JS Playground
+          </h1>
           <p className="mt-2 opacity-90">
             Write and execute JavaScript code in real-time
           </p>
