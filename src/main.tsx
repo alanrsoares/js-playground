@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 
 import "./index.css";
 
-import App from "./App.tsx";
+import App from "./app";
 import { Maybe } from "./lib/monad.ts";
 
 Maybe.of(document.getElementById("root"))
