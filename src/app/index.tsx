@@ -5,6 +5,7 @@ import { Code, Play } from "lucide-react";
 import tw from "styled-cva";
 
 import { Editor } from "~/components/Editor";
+import { Layout } from "~/components/Layout";
 import { Result } from "~/components/Result";
 import { useEval } from "~/hooks/useEval";
 import { AppLogo } from "~/icons/AppLogo";
@@ -41,23 +42,17 @@ function App() {
 
   const format = usePrettierFormatter();
 
-  // Function to update the URL with the current code
   const updateURLWithCode = useCallback((code: string) => {
     const encodedCode = encodeURIComponent(code);
     const newURL = `${window.location.protocol}//${window.location.host}${window.location.pathname}?code=${encodedCode}`;
     window.history.replaceState(null, "", newURL);
   }, []);
 
-  // Function to load code from the URL
   const loadCodeFromURL = useCallback(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has("code")) {
-      return Maybe.of(urlParams.get("code")).map(decodeURIComponent);
-    }
-    return Maybe.ofFalsy<string>();
+    return Maybe.of(urlParams.get("code")).map(decodeURIComponent);
   }, []);
 
-  // On component mount, check URL for code
   useEffect(() => {
     const urlCode = loadCodeFromURL();
     urlCode.map(setCode);
@@ -70,7 +65,6 @@ function App() {
   const handleFormat = useCallback(async () => {
     try {
       const formatted = await format(code);
-
       Maybe.of(formatted).map(setCode);
     } catch (err) {
       console.error("Formatting error:", err);
@@ -102,52 +96,49 @@ function App() {
   ]);
 
   return (
-    <div className="min-h-screen bg-base-100">
-      <div className="container mx-auto px-4 py-8">
-        <header className="mb-8">
-          <h1 className="flex items-center gap-2 text-3xl font-bold">
-            <AppLogo className="size-[0.75em]" />
-            JS Playground
-          </h1>
-          <p className="mt-2 opacity-90">
-            Write and execute JavaScript code in real-time
-          </p>
-        </header>
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <CardContainter>
-            <CardHeader>
-              <h2 className="font-semibold text-white">Editor</h2>
-              <div className="flex gap-2">
-                <Button
-                  onClick={handleFormat}
-                  shape="circle"
-                  size="sm"
-                  color="info"
-                >
-                  <Code className="size-[1em]" />
-                </Button>
-                <Button
-                  onClick={evaluateCode.bind(null, code)}
-                  shape="circle"
-                  size="sm"
-                  color="success"
-                  className="hover:animate-pulse"
-                >
-                  <Play className="size-[1em]" />
-                </Button>
-              </div>
-            </CardHeader>
-            <Editor code={code} onChange={setCode} />
-          </CardContainter>
-          <CardContainter>
-            <CardHeader>
-              <h2 className="font-semibold text-white">Output</h2>
-            </CardHeader>
-            <Result result={result} error={error} />
-          </CardContainter>
-        </div>
+    <Layout
+      title={
+        <>
+          <AppLogo className="size-[0.75em]" />
+          JS Playground
+        </>
+      }
+      subtitle="Write and execute JavaScript code in real-time"
+    >
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <CardContainter>
+          <CardHeader>
+            <h2 className="font-semibold text-white">Editor</h2>
+            <div className="flex gap-2">
+              <Button
+                onClick={handleFormat}
+                shape="circle"
+                size="sm"
+                color="info"
+              >
+                <Code className="size-[1em]" />
+              </Button>
+              <Button
+                onClick={evaluateCode.bind(null, code)}
+                shape="circle"
+                size="sm"
+                color="success"
+                className="hover:animate-pulse"
+              >
+                <Play className="size-[1em]" />
+              </Button>
+            </div>
+          </CardHeader>
+          <Editor code={code} onChange={setCode} />
+        </CardContainter>
+        <CardContainter>
+          <CardHeader>
+            <h2 className="font-semibold text-white">Output</h2>
+          </CardHeader>
+          <Result result={result} error={error} />
+        </CardContainter>
       </div>
-    </div>
+    </Layout>
   );
 }
 
