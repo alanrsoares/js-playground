@@ -3,7 +3,8 @@ import { FC, ReactNode } from "react";
 import tw from "styled-cva";
 
 const LayoutContainer = tw.div`
-  min-h-screen bg-base-100
+  min-h-screen 
+  bg-base-100
 `;
 
 const LayoutInner = tw.div`

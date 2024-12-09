@@ -10,7 +10,12 @@ export default {
     "node_modules/react-daisyui/dist/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "gradient-radial":
+          "radial-gradient(circle at top center, var(--tw-gradient-stops))",
+      },
+    },
   },
   plugins: [daisyui],
   daisyui: {
