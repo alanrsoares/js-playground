@@ -14,16 +14,24 @@ import useLocalStorageState from "~/lib/hooks/useLocalStorageState";
 import usePrettierFormatter from "~/lib/hooks/usePrettierFormatter";
 import { Maybe } from "~/lib/monad";
 
-const DEFAULT_CODE = `// Write your JavaScript code here
-function fibonacci(n) {
-  if (n <= 1) return n;
-  console.log(\`Calculating fibonacci(\${n})\`);
-  return fibonacci(n - 1) + fibonacci(n - 2);
-}
+const DEFAULT_CODE = `const reduce = (arr, fn, acc) =>
+  arr.length === 0 ? acc : reduce(arr.slice(1), fn, fn(acc, arr[0]));
 
-console.log('Starting fibonacci calculation...');
+const map = (arr, fn) =>
+  reduce(arr, (acc, curr, i) => [...acc, fn(curr, i)], []);
+const filter = (arr, fn) =>
+  reduce(arr, (acc, curr, i) => (fn(curr, i) ? [...acc, curr] : acc), []);
+const some = (arr, fn) =>
+  reduce(arr, (acc, curr, i) => acc || fn(curr, i), false);
+const every = (arr, fn) =>
+  reduce(arr, (acc, curr, i) => acc && fn(curr, i), true);
 
-return fibonacci(5);`;
+// Example usage
+const numbers = [1, 2, 3, 4];
+console.log(map(numbers, (x) => x * 2)); // [2, 4, 6, 8]
+console.log(filter(numbers, (x) => x % 2 === 0)); // [2, 4]
+console.log(some(numbers, (x) => x % 2 === 0)); // true
+console.log(every(numbers, (x) => x % 2 === 0)); // false`;
 
 const CardContainter = tw.div`
   h-[500px] overflow-hidden rounded-lg shadow-lg
