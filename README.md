@@ -17,7 +17,7 @@ This application allows users to write, execute, and share JavaScript code in re
 
 ## Installation
 
-Before running the project, ensure you have [Node.js](https://nodejs.org/) installed.
+Before running the project, ensure you have [Bun](https://bun.sh/) installed.
 
 1. Clone the repository:
 
@@ -39,4 +39,4 @@ Before running the project, ensure you have [Node.js](https://nodejs.org/) insta
 
 ## License
 
-This project is licensed under [Unlicense](https://unlicense.org). For more information, see the [LICENSE](LICENSE) file.
+This project is licensed under [Unlicense](https://ucnlicense.org). For more information, see the [LICENSE](LICENSE) file.
