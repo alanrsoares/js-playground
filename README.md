@@ -39,4 +39,4 @@ Before running the project, ensure you have [Node.js](https://nodejs.org/) insta
 
 ## License
 
-This project is licensed under [Unlicense](unlicense.org). For more information, see the [LICENSE](LICENSE) file.
+This project is licensed under [Unlicense](https://unlicense.org). For more information, see the [LICENSE](LICENSE) file.
