@@ -1,4 +1,4 @@
-# JavaScript Playground
+# JS Playground
 
 An interactive JavaScript playground to execute and share JavaScript code snippets.
 
