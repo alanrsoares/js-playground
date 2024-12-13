@@ -1,6 +1,7 @@
 {
   "name": "@alanrsoares/js-playground",
   "description": "An interactive JavaScript playground",
+  "author": "Alan R. Soares <alanrsoars@gmail.com>",
   "private": true,
   "version": "0.0.0",
   "type": "module",
