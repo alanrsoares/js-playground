@@ -19,6 +19,10 @@ This application allows users to write, execute, and share JavaScript code in re
 
 Before running the project, ensure you have [Bun](https://bun.sh/) installed.
 
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
 1. Clone the repository:
 
    ```bash
