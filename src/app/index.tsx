@@ -99,10 +99,7 @@ function App() {
       modifiers: {
         ctrlKey: true,
       },
-      callback: (e) => {
-        e.preventDefault();
-        evaluateCode(code);
-      },
+      callback: evaluateCode.bind(null, code),
     },
     {
       key: "f",
@@ -110,10 +107,7 @@ function App() {
         ctrlKey: true,
         shiftKey: true,
       },
-      callback: async (e) => {
-        e.preventDefault();
-        await handleFormat();
-      },
+      callback: handleFormat,
     },
   ]);
 
