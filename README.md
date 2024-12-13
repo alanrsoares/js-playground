@@ -24,3 +24,19 @@ Before running the project, ensure you have [Node.js](https://nodejs.org/) insta
    ```bash
    git clone https://github.com/alanrsoares/js-playground.git
    ```
+
+2. Install dependencies:
+
+   ```bash
+   bun install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   bun dev
+   ```
+
+## License
+
+This project is licensed under [Unlicense](unlicense.org). For more information, see the [LICENSE](LICENSE) file.
