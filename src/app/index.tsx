@@ -93,13 +93,17 @@ function App() {
     }
   }, [code, format, setCode]);
 
+  const handleEvaluate = useCallback(() => {
+    evaluateCode(code);
+  }, [code, evaluateCode]);
+
   useKeyBindings([
     {
       key: "Enter",
       modifiers: {
         ctrlKey: true,
       },
-      callback: evaluateCode.bind(null, code),
+      callback: handleEvaluate,
     },
     {
       key: "f",
