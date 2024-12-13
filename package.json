@@ -1,5 +1,6 @@
 {
   "name": "@alanrsoares/js-playground",
+  "description": "An interactive JavaScript playground",
   "private": true,
   "version": "0.0.0",
   "type": "module",
