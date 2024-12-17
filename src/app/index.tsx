@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { Button } from "react-daisyui";
+import { Button, Tooltip } from "react-daisyui";
 
 import { Play, Wand2 } from "lucide-react";
 import tw from "styled-cva";
@@ -23,8 +23,8 @@ function safeDecodeURIComponent(encoded: string) {
   }
 }
 
-const CardContainter = tw.div`
-  h-[500px] overflow-hidden rounded-lg shadow-lg
+const CardContainer = tw.div`
+  h-[500px] rounded-lg shadow-lg
 `;
 
 const CardHeader = tw.div`
@@ -102,37 +102,41 @@ function App() {
       subtitle="Write and execute JavaScript code in real-time"
     >
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <CardContainter>
+        <CardContainer>
           <CardHeader>
             <h2 className="font-semibold text-white">Editor</h2>
             <div className="flex gap-2">
-              <Button
-                onClick={handleFormat}
-                shape="circle"
-                size="sm"
-                color="info"
-              >
-                <Wand2 className="size-[1em]" />
-              </Button>
-              <Button
-                onClick={evaluateCode.bind(null, code)}
-                shape="circle"
-                size="sm"
-                color="success"
-                className="hover:animate-pulse"
-              >
-                <Play className="size-[1em]" />
-              </Button>
+              <Tooltip message="Format code (Ctrl+Shift+F)">
+                <Button
+                  onClick={handleFormat}
+                  shape="circle"
+                  size="sm"
+                  color="info"
+                >
+                  <Wand2 className="size-[1em]" />
+                </Button>
+              </Tooltip>
+              <Tooltip message="Run code (Ctrl+Enter)">
+                <Button
+                  onClick={evaluateCode.bind(null, code)}
+                  shape="circle"
+                  size="sm"
+                  color="success"
+                  className="hover:animate-pulse"
+                >
+                  <Play className="size-[1em]" />
+                </Button>
+              </Tooltip>
             </div>
           </CardHeader>
           <Editor code={code} onChange={setCode} />
-        </CardContainter>
-        <CardContainter>
+        </CardContainer>
+        <CardContainer>
           <CardHeader>
             <h2 className="font-semibold text-white">Output</h2>
           </CardHeader>
           <Result result={result} error={error} />
-        </CardContainter>
+        </CardContainer>
       </div>
     </Layout>
   );
