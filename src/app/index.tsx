@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { Button } from "react-daisyui";
 
-import { Code, Play } from "lucide-react";
+import { Play, Wand2 } from "lucide-react";
 import tw from "styled-cva";
 
 import { Editor } from "~/components/Editor";
@@ -14,6 +14,14 @@ import useLocalStorageState from "~/lib/hooks/useLocalStorageState";
 import usePrettierFormatter from "~/lib/hooks/usePrettierFormatter";
 import { Maybe } from "~/lib/monad";
 import { DEFAULT_CODE } from "./constants";
+
+function safeDecodeURIComponent(encoded: string) {
+  try {
+    return window.decodeURIComponent(encoded);
+  } catch {
+    return "";
+  }
+}
 
 const CardContainter = tw.div`
   h-[500px] overflow-hidden rounded-lg shadow-lg
@@ -40,7 +48,7 @@ function App() {
 
   const loadCodeFromURL = useCallback(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    return Maybe.of(urlParams.get("code")).map(decodeURIComponent);
+    return Maybe.of(urlParams.get("code")).map(safeDecodeURIComponent);
   }, []);
 
   useEffect(() => {
@@ -104,7 +112,7 @@ function App() {
                 size="sm"
                 color="info"
               >
-                <Code className="size-[1em]" />
+                <Wand2 className="size-[1em]" />
               </Button>
               <Button
                 onClick={evaluateCode.bind(null, code)}

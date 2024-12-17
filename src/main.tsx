@@ -6,6 +6,8 @@ import "./index.css";
 import App from "./app";
 import { Maybe } from "./lib/monad.ts";
 
+localStorage.clear();
+
 Maybe.of(document.getElementById("root"))
   .map(createRoot)
   .map((root) =>
