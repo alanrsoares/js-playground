@@ -4,19 +4,17 @@ const prettify = (arg: unknown) =>
 export function createConsoleProxy() {
   let output: string[] = [];
 
+  const log = (prefix: string | null, ...args: unknown[]) => {
+    const result = args.map(prettify).join(" ");
+
+    output.push(prefix ? `${prefix} ${result}` : result);
+  };
+
   const handler = {
-    log: (...args: unknown[]) => {
-      output.push(args.map(prettify).join(" "));
-    },
-    error: (...args: unknown[]) => {
-      output.push(`Error: ${args.map(prettify).join(" ")}`);
-    },
-    warn: (...args: unknown[]) => {
-      output.push(`Warning: ${args.map(prettify).join(" ")}`);
-    },
-    info: (...args: unknown[]) => {
-      output.push(`Info: ${args.map(prettify).join(" ")}`);
-    },
+    log: log.bind(console, null),
+    error: log.bind(console, "❌"),
+    warn: log.bind(console, "⚠️"),
+    info: log.bind(console, "ℹ️"),
     clear: () => {
       output = [];
     },
