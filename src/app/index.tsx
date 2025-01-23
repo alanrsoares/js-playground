@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { Button, Tooltip } from "react-daisyui";
 
-import { Play, Wand2 } from "lucide-react";
+import { PlayIcon, Wand2Icon, XIcon } from "lucide-react";
 import tw from "styled-cva";
 
 import { Editor } from "~/components/Editor";
@@ -36,7 +36,7 @@ function App() {
     "js-playground-code",
     DEFAULT_CODE,
   );
-  const { result, error, evaluateCode } = useEval();
+  const { result, error, evaluateCode, clearOutput } = useEval();
 
   const format = usePrettierFormatter();
 
@@ -113,7 +113,7 @@ function App() {
                   size="sm"
                   color="info"
                 >
-                  <Wand2 className="size-[1em]" />
+                  <Wand2Icon className="size-[1em]" />
                 </Button>
               </Tooltip>
               <Tooltip message="Run code (Ctrl+Enter)">
@@ -124,7 +124,7 @@ function App() {
                   color="success"
                   className="hover:animate-pulse"
                 >
-                  <Play className="size-[1em]" />
+                  <PlayIcon className="size-[1em]" />
                 </Button>
               </Tooltip>
             </div>
@@ -134,6 +134,13 @@ function App() {
         <CardContainer>
           <CardHeader>
             <h2 className="font-semibold text-white">Output</h2>
+            <div className="flex gap-2">
+              <Tooltip message="Clear output">
+                <Button onClick={clearOutput} shape="circle" size="sm">
+                  <XIcon className="size-[1em]" />
+                </Button>
+              </Tooltip>
+            </div>
           </CardHeader>
           <Result result={result} error={error} />
         </CardContainer>

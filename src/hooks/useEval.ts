@@ -2,8 +2,10 @@ import { useCallback, useState } from "react";
 
 import { createConsoleProxy } from "../utils/console";
 
+const INITIAL_OUTPUT = "// Result will appear here";
+
 export function useEval() {
-  const [result, setResult] = useState("// Result will appear here");
+  const [result, setResult] = useState(INITIAL_OUTPUT);
   const [error, setError] = useState<string | null>(null);
 
   const evaluateCode = useCallback((code: string) => {
@@ -60,5 +62,10 @@ export function useEval() {
     }
   }, []);
 
-  return { result, error, evaluateCode };
+  return {
+    result,
+    error,
+    evaluateCode,
+    clearOutput: setResult.bind(null, INITIAL_OUTPUT),
+  };
 }
