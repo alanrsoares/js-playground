@@ -17,7 +17,7 @@ export function createConsoleProxy() {
     error: $log("❌"),
     warn: $log("⚠️"),
     info: $log("ℹ️"),
-    clear: () => {
+    clear() {
       output = [];
     },
   };
