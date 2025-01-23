@@ -10,11 +10,13 @@ export function createConsoleProxy() {
     output.push(prefix ? `${prefix} ${result}` : result);
   };
 
+  const $log = (prefix: string | null) => log.bind(console, prefix);
+
   const handler = {
-    log: log.bind(console, null),
-    error: log.bind(console, "❌"),
-    warn: log.bind(console, "⚠️"),
-    info: log.bind(console, "ℹ️"),
+    log: $log(null),
+    error: $log("❌"),
+    warn: $log("⚠️"),
+    info: $log("ℹ️"),
     clear: () => {
       output = [];
     },
