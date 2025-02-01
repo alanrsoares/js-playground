@@ -43,4 +43,4 @@ curl -fsSL https://bun.sh/install | bash
 
 ## License
 
-This project is licensed under [Unlicense](https://ucnlicense.org). For more information, see the [LICENSE](LICENSE) file.
+This project is licensed under [Unlicense](https://unlicense.org). For more information, see the [LICENSE](LICENSE) file.
